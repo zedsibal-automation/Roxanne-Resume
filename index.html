@@ -422,7 +422,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
-
+    console.log("Submit event fired!");
     let firstInvalid = null;
     let allValid = true;
     Object.keys(fields).forEach((key) => {
