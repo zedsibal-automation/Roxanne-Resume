@@ -458,12 +458,34 @@ submitBtn.querySelector('.btn__label').textContent = 'Sending…';
 
 try {
 
+const token = turnstile.getResponse();
+
+if (!token) {
+
+    statusEl.textContent =
+        "Please complete the security check.";
+
+    statusEl.classList.remove("form-status--success");
+    statusEl.classList.add("form-status--error");
+
+    submitBtn.disabled = false;
+
+    submitBtn.querySelector(".btn__label").textContent =
+        "Send Message";
+
+    return;
+}
+
+  
     const data = {
         firstName: fields.firstName.el.value.trim(),
         lastName: fields.lastName.el.value.trim(),
         email: fields.email.el.value.trim(),
         phone: document.getElementById("phoneFull").value,
         message: fields.message.el.value.trim()
+
+       turnstileToken: token
+
     };
 
     const response = await fetch(
