@@ -260,7 +260,15 @@
       <span class="field__error" id="messageError"></span>
     </div>
 
+   
+    
     <div class="inquiry__footer">
+
+     <div
+    class="cf-turnstile"
+    data-sitekey="0x4AAAAAAD75SkX5Y-W81PgNsR4z17oSSWA">
+    </div>
+      
       <button type="submit" class="btn btn--primary btn--submit" id="submitBtn">
         <span class="btn__label">Send Message</span>
       </button>
@@ -282,7 +290,7 @@
   </div>
   <p class="contact__foot">© <span id="year"></span> Roxanne Sison Gonzales</p>
 </footer>
-
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.14.0/build/js/intlTelInput.min.js"></script>
 <script>
   console.log("JavaScript loaded!");
