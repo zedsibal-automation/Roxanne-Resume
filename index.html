@@ -19,9 +19,9 @@
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#experience">Experience</a>
-    <a href="#contact">Contact</a>
+    <a href="#contact-form">Contact</a>
   </nav>
-  <a href="#contact" class="nav__cta">Hire Me</a>
+  <a href="#contact-form" class="nav__cta">Hire Me</a>
 </header>
 
 <!-- ============ HERO ============ -->
@@ -177,10 +177,102 @@
   </div>
 </section>
 
+<!-- ============ CONTACT FORM ============ -->
+<section class="inquiry" id="contact-form">
+  <div class="section-head">
+    <p class="eyebrow">Get In Touch</p>
+    <h2>Tell me about your family's care needs</h2>
+    <p class="inquiry__sub">Fill out the form below and I'll get back to you as soon as I can — usually within a day.</p>
+  </div>
+
+  <form class="inquiry__form" id="inquiryForm" novalidate>
+    <div class="form-row">
+      <div class="field">
+        <label for="firstName">First Name</label>
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          autocomplete="given-name"
+          placeholder="Juan"
+          aria-describedby="firstNameError"
+          required>
+        <span class="field__error" id="firstNameError"></span>
+      </div>
+
+      <div class="field">
+        <label for="lastName">Last Name</label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          autocomplete="family-name"
+          placeholder="Dela Cruz"
+          aria-describedby="lastNameError"
+          required>
+        <span class="field__error" id="lastNameError"></span>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        <label for="phone">Phone Number</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          autocomplete="tel"
+          inputmode="tel"
+          placeholder="(587) 937-0174"
+          aria-describedby="phoneError"
+          required>
+        <span class="field__error" id="phoneError"></span>
+      </div>
+
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          autocomplete="email"
+          inputmode="email"
+          placeholder="you@example.com"
+          aria-describedby="emailError"
+          required>
+        <span class="field__error" id="emailError"></span>
+      </div>
+    </div>
+
+    <div class="field field--full">
+      <div class="field__label-row">
+        <label for="message">Message</label>
+        <span class="field__count" id="messageCount">0 / 500</span>
+      </div>
+      <textarea
+        id="message"
+        name="message"
+        rows="5"
+        maxlength="500"
+        placeholder="Tell me a bit about your family and the kind of care you're looking for..."
+        aria-describedby="messageError"
+        required></textarea>
+      <span class="field__error" id="messageError"></span>
+    </div>
+
+    <div class="inquiry__footer">
+      <button type="submit" class="btn btn--primary btn--submit" id="submitBtn">
+        <span class="btn__label">Send Message</span>
+      </button>
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+    </div>
+  </form>
+</section>
+
 <!-- ============ CONTACT ============ -->
 <footer class="contact" id="contact">
   <div class="contact__inner">
-    <p class="eyebrow">Get in touch</p>
+    <p class="eyebrow">Reach Me Directly</p>
     <h2>Let's talk about your family's care</h2>
     <div class="contact__links">
       <a href="tel:5879370174">📞 587-937-0174</a>
@@ -191,6 +283,150 @@
   <p class="contact__foot">© <span id="year"></span> Roxanne Sison Gonzales</p>
 </footer>
 
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+(function () {
+  const form = document.getElementById('inquiryForm');
+  const fields = {
+    firstName: {
+      el: document.getElementById('firstName'),
+      errorEl: document.getElementById('firstNameError'),
+      validate(value) {
+        const v = value.trim();
+        if (!v) return 'First name is required.';
+        if (v.length < 2) return 'First name must be at least 2 characters.';
+        if (!/^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/.test(v)) return 'Use letters only, please.';
+        return '';
+      }
+    },
+    lastName: {
+      el: document.getElementById('lastName'),
+      errorEl: document.getElementById('lastNameError'),
+      validate(value) {
+        const v = value.trim();
+        if (!v) return 'Last name is required.';
+        if (v.length < 2) return 'Last name must be at least 2 characters.';
+        if (!/^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/.test(v)) return 'Use letters only, please.';
+        return '';
+      }
+    },
+    phone: {
+      el: document.getElementById('phone'),
+      errorEl: document.getElementById('phoneError'),
+      validate(value) {
+        const v = value.trim();
+        if (!v) return 'Phone number is required.';
+        const digits = v.replace(/\D/g, '');
+        if (digits.length < 7 || digits.length > 15) return 'Enter a valid phone number.';
+        if (!/^[0-9+()\-.\s]+$/.test(v)) return 'Phone number has invalid characters.';
+        return '';
+      }
+    },
+    email: {
+      el: document.getElementById('email'),
+      errorEl: document.getElementById('emailError'),
+      validate(value) {
+        const v = value.trim();
+        if (!v) return 'Email address is required.';
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!re.test(v)) return 'Enter a valid email address.';
+        return '';
+      }
+    },
+    message: {
+      el: document.getElementById('message'),
+      errorEl: document.getElementById('messageError'),
+      validate(value) {
+        const v = value.trim();
+        if (!v) return 'Please add a short message.';
+        if (v.length < 10) return 'Message should be at least 10 characters.';
+        if (v.length > 500) return 'Message must be under 500 characters.';
+        return '';
+      }
+    }
+  };
+
+  const messageCount = document.getElementById('messageCount');
+  fields.message.el.addEventListener('input', () => {
+    const len = fields.message.el.value.length;
+    messageCount.textContent = `${len} / 500`;
+    messageCount.classList.toggle('field__count--near', len > 450);
+  });
+
+  function setFieldError(key, msg) {
+    const { el, errorEl } = fields[key];
+    if (msg) {
+      el.classList.add('field--invalid');
+      el.classList.remove('field--valid');
+      el.setAttribute('aria-invalid', 'true');
+      errorEl.textContent = msg;
+    } else {
+      el.classList.remove('field--invalid');
+      el.classList.add('field--valid');
+      el.removeAttribute('aria-invalid');
+      errorEl.textContent = '';
+    }
+  }
+
+  function validateField(key) {
+    const msg = fields[key].validate(fields[key].el.value);
+    setFieldError(key, msg);
+    return !msg;
+  }
+
+  Object.keys(fields).forEach((key) => {
+    const { el } = fields[key];
+    el.addEventListener('blur', () => validateField(key));
+    el.addEventListener('input', () => {
+      if (el.classList.contains('field--invalid')) validateField(key);
+    });
+  });
+
+  const statusEl = document.getElementById('formStatus');
+  const submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    let firstInvalid = null;
+    let allValid = true;
+    Object.keys(fields).forEach((key) => {
+      const ok = validateField(key);
+      if (!ok) {
+        allValid = false;
+        if (!firstInvalid) firstInvalid = fields[key].el;
+      }
+    });
+
+    if (!allValid) {
+      statusEl.textContent = 'Please fix the highlighted fields above.';
+      statusEl.classList.remove('form-status--success');
+      statusEl.classList.add('form-status--error');
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+
+    // No backend is connected yet — this simulates a successful send.
+    // Swap this block for a real fetch() call to your form endpoint
+    // (e.g. Formspree, EmailJS, or a custom API route) when ready.
+    submitBtn.disabled = true;
+    submitBtn.querySelector('.btn__label').textContent = 'Sending…';
+
+    setTimeout(() => {
+      statusEl.textContent = "Thanks! Your message has been sent — I'll get back to you soon.";
+      statusEl.classList.remove('form-status--error');
+      statusEl.classList.add('form-status--success');
+      form.reset();
+      messageCount.textContent = '0 / 500';
+      Object.keys(fields).forEach((key) => {
+        fields[key].el.classList.remove('field--valid', 'field--invalid');
+      });
+      submitBtn.disabled = false;
+      submitBtn.querySelector('.btn__label').textContent = 'Send Message';
+    }, 700);
+  });
+})();
+</script>
 </body>
 </html>
