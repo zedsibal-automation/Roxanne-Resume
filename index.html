@@ -482,7 +482,7 @@ if (!token) {
         lastName: fields.lastName.el.value.trim(),
         email: fields.email.el.value.trim(),
         phone: document.getElementById("phoneFull").value,
-        message: fields.message.el.value.trim()
+        message: fields.message.el.value.trim(),
 
        turnstileToken: token
 
@@ -512,7 +512,7 @@ if (!token) {
     statusEl.classList.add("form-status--success");
 
     form.reset();
-
+    turnstile.reset();
     messageCount.textContent = "0 / 500";
 
     Object.keys(fields).forEach((key) => {
