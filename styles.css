@@ -404,6 +404,54 @@ section, header, footer { padding: 4.5rem 6vw; max-width: var(--max); margin: 0 
 }
 .field textarea { resize: vertical; min-height: 110px; }
 
+/* -- International phone picker (intl-tel-input) theming -- */
+.iti {
+  width: 100%;
+  --iti-path-flags-1x: url('https://cdn.jsdelivr.net/npm/intl-tel-input@25.14.0/build/img/flags.webp');
+  --iti-path-flags-2x: url('https://cdn.jsdelivr.net/npm/intl-tel-input@25.14.0/build/img/flags@2x.webp');
+  --iti-path-globe-1x: url('https://cdn.jsdelivr.net/npm/intl-tel-input@25.14.0/build/img/globe.webp');
+  --iti-path-globe-2x: url('https://cdn.jsdelivr.net/npm/intl-tel-input@25.14.0/build/img/globe@2x.webp');
+  --iti-border-color: var(--line);
+  --iti-hover-color: var(--cloud);
+  --iti-dropdown-bg: #fff;
+  --iti-dialcode-color: var(--ink-soft);
+  --iti-icon-color: var(--scrub-deep);
+  --iti-arrow-color: var(--scrub-deep);
+}
+.iti input {
+  font-family: var(--sans);
+  font-size: 0.98rem;
+  color: var(--ink);
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  width: 100%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.iti input::placeholder { color: #A9AFAE; }
+.iti input:focus {
+  outline: none;
+  border-color: var(--scrub-deep);
+  box-shadow: 0 0 0 3px rgba(63,102,131,0.15);
+}
+.iti input.field--valid { border-color: var(--sage); }
+.iti input.field--invalid {
+  border-color: var(--error);
+  background: var(--error-soft);
+}
+.iti input.field--invalid:focus {
+  box-shadow: 0 0 0 3px rgba(176,72,58,0.15);
+}
+.iti__selected-country {
+  border-radius: 12px 0 0 12px;
+}
+.iti__dropdown-content {
+  border-radius: 12px;
+  border-color: var(--line);
+  box-shadow: 0 18px 40px -18px rgba(43,58,66,0.35);
+}
+
 .field input:focus,
 .field textarea:focus {
   outline: none;
