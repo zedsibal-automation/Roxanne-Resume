@@ -14,6 +14,8 @@
   --gold:       #C99A44;
   --cloud:      #E9EFF3;
   --line:       #DCD5C6;
+  --error:      #B0483A;
+  --error-soft: #F6E7E3;
 
   --serif: "Fraunces", Georgia, serif;
   --sans:  "Source Sans 3", -apple-system, sans-serif;
@@ -124,10 +126,14 @@ section, header, footer { padding: 4.5rem 6vw; max-width: var(--max); margin: 0 
   font-size: 0.95rem;
   display: inline-block;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border: none;
+  cursor: pointer;
+  font-family: var(--sans);
 }
 .btn:hover, .btn:focus-visible { transform: translateY(-2px); }
 .btn--primary { background: var(--scrub-deep); color: #fff; box-shadow: 0 8px 20px -8px rgba(63,102,131,0.6); }
 .btn--ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+.btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
 
 .badge-strip {
   display: inline-flex;
@@ -316,6 +322,136 @@ section, header, footer { padding: 4.5rem 6vw; max-width: var(--max); margin: 0 
 .info-card h3 { font-size: 1rem; color: var(--scrub-deep); margin-bottom: 1.2rem; }
 .info-card .chip-list { justify-content: center; }
 @media (max-width: 640px) { .cert-lang-grid { grid-template-columns: 1fr; } }
+
+/* ---------- CONTACT FORM (INQUIRY) ---------- */
+.inquiry {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  margin-top: 1rem;
+}
+.inquiry__sub {
+  color: var(--ink-soft);
+  margin-top: 0.6rem;
+  font-size: 1rem;
+}
+
+.inquiry__form {
+  background: var(--paper-dim);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2.2rem;
+  max-width: 720px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+  margin-bottom: 1.4rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.4rem;
+}
+.form-row .field { margin-bottom: 0; }
+.field--full { grid-column: 1 / -1; }
+
+.field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--scrub-deep);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.01em;
+}
+
+.field__label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.field__count {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+.field__count--near { color: var(--gold); font-weight: 700; }
+
+.field input,
+.field textarea {
+  font-family: var(--sans);
+  font-size: 0.98rem;
+  color: var(--ink);
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  width: 100%;
+}
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #A9AFAE;
+}
+.field textarea { resize: vertical; min-height: 110px; }
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--scrub-deep);
+  box-shadow: 0 0 0 3px rgba(63,102,131,0.15);
+}
+
+.field input.field--valid,
+.field textarea.field--valid {
+  border-color: var(--sage);
+}
+.field input.field--invalid,
+.field textarea.field--invalid {
+  border-color: var(--error);
+  background: var(--error-soft);
+}
+.field input.field--invalid:focus,
+.field textarea.field--invalid:focus {
+  box-shadow: 0 0 0 3px rgba(176,72,58,0.15);
+}
+
+.field__error {
+  display: block;
+  min-height: 1.1rem;
+  font-size: 0.8rem;
+  color: var(--error);
+  margin-top: 0.4rem;
+  font-weight: 600;
+}
+
+.inquiry__footer {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+
+.btn--submit {
+  min-width: 160px;
+  text-align: center;
+}
+
+.form-status {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+}
+.form-status--success { color: var(--sage); }
+.form-status--error { color: var(--error); }
+
+@media (max-width: 640px) {
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+  .inquiry__form { padding: 1.6rem; }
+}
 
 /* ---------- CONTACT / FOOTER ---------- */
 .contact {
